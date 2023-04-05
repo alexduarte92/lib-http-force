@@ -41,6 +41,10 @@ global class HttpClientConfig {
         return new Builder();
     }
 
+    global static Builder builder(HttpClientConfig config) {
+        return new Builder(config);
+    }
+
     global class Builder {
         private String url;
         private String method;
@@ -49,6 +53,10 @@ global class HttpClientConfig {
         private Object body;
         private Boolean sendBodyAsBlob;
         private Integer timeout;
+
+        global Builder(HttpClientConfig config) {
+            this.fromHttpClientConfig(config);
+        }
 
         global Builder() {
             this.headers = new Map<String,String>();
@@ -101,6 +109,16 @@ global class HttpClientConfig {
         global Builder setTimeout(Integer timeout) {
             this.timeout = timeout;
             return this;
+        }
+
+        private void fromHttpClientConfig(HttpClientConfig config) {
+            this.url = config.getUrl();
+            this.method = config.getMethod();
+            this.headers = config.getHeaders();
+            this.params = config.getParams();
+            this.body = config.getBody();
+            this.sendBodyAsBlob = config.getSendBodyAsBlob();
+            this.timeout = config.getTimeout();
         }
 
         global HttpClientConfig build() {

@@ -29,4 +29,29 @@ public class HttpClientConfigTest {
         System.assertEquals(sendBodyAsBlob, config.getSendBodyAsBlob());
         System.assertEquals(timeout, config.getTimeout());
     }
+
+    @isTest
+    static void testHttpClientConfigBuilderFromAnotherConfig() {
+        String url = 'https://jsonplaceholder.typicode.com/posts';
+        String method = 'POST';
+        Map<String, String> headers = new Map<String, String>{'Content-Type' => 'application/json'};
+        Map<String, String> params = new Map<String, String>{'userId' => '1', 'title' => 'test title', 'body' => 'test body'};
+        String body = '{"userId": 1, "title": "test title", "body": "test body"}';
+        Boolean sendBodyAsBlob = false;
+        Integer timeout = 5000;
+        
+        HttpClientConfig config = HttpClientConfig.builder()
+            .setUrl(url)
+            .setMethod(method)
+            .setHeaders(headers)
+            .addHeader('Authorization', 'Basic oipajsidasidad==')
+            .setParams(params)
+            .addParam('teste', 'teste1')
+            .setBody(body)
+            .setSendBodyAsBlob(sendBodyAsBlob)
+            .setTimeout(timeout)
+            .build();
+        
+        HttpClientConfig config_new = HttpClientConfig.builder(config).build();
+    }
 }
