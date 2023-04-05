@@ -10,9 +10,10 @@ global class HttpClientHelper {
         Boolean isUrlEncoded = false;
         for (String key : headers.keySet()) {
             if (key.equalsIgnoreCase(HEADER_CONTENT_TYPE)) {
-                if(headers.get(key).equalsIgnoreCase(HEADER_URL_ENCODED))
-                isUrlEncoded = true;
-                break;
+                if(headers.get(key).equalsIgnoreCase(HEADER_URL_ENCODED)){
+                    isUrlEncoded = true;
+                    break;
+                }
             }
         }
 

@@ -7,8 +7,6 @@ global class HttpClientConfig {
     private Boolean sendBodyAsBlob;
     private Integer timeout;
 
-    global HttpClientConfig(){}
-
     global String getUrl() {
         return this.url;
     }
