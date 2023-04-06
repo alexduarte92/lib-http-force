@@ -2,11 +2,13 @@ global class HttpClientErrorHandlerResponse {
     private String responseBody;
     private Integer statusCode;
     private String status;
-    
-    global HttpClientErrorHandlerResponse(String responseBody, Integer statusCode, String status) {
-        this.responseBody = responseBody;
-        this.statusCode = statusCode;
-        this.status = status;
+    private HttpResponse response;
+
+    global HttpClientErrorHandlerResponse(HttpResponse response) {
+        this.responseBody = response.getBody();
+        this.statusCode = response.getStatusCode();
+        this.status = response.getStatus();
+        this.response = response;
     }
     
     public String getResponseBody() {
@@ -19,5 +21,9 @@ global class HttpClientErrorHandlerResponse {
     
     public String getStatus() {
         return this.status;
+    }
+
+    public HttpResponse getResponse() {
+        return this.response;
     }
 }

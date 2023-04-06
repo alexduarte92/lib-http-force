@@ -11,7 +11,7 @@ global class HttpClient {
 
         return request(config, classType);
     }
- 
+
     global static Object doPost(String url, Type classType, Map<String,String> headers, Object body) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('POST').setUrl(url).setHeaders(headers).setBody(body).build();
 
@@ -110,7 +110,7 @@ global class HttpClient {
     @TestVisible
     private static void validateHttpResponse(HttpResponse response) {
         if(response.getStatusCode() > 299) {
-            throw new HttpClientException('Erro ao realizar a chamada', new HttpClientErrorHandlerResponse(response.getBody(), response.getStatusCode(), response.getStatus()));
+            throw new HttpClientException('Erro ao realizar a chamada', new HttpClientErrorHandlerResponse(response));
         }
     }
 

@@ -1,7 +1,7 @@
 {
   "name": "lib-http-force",
   "private": true,
-  "version": "0.1.0-beta",
+  "version": "0.1.1-beta",
   "description": "Salesforce Http Client",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
