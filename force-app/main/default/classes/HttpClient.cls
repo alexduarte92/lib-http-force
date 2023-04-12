@@ -1,43 +1,42 @@
-global class HttpClient {
-
-    global static Object doPatch(String url, Type classType, Map<String,String> headers, Object body) {
+public class HttpClient {
+    public static Object doPatch(String url, Type classType, Map<String,String> headers, Object body) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('PATCH').setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
-    global static Object doPut(String url, Type classType, Map<String,String> headers, Object body) {
+    public static Object doPut(String url, Type classType, Map<String,String> headers, Object body) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('PUT').setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
-    global static Object doPost(String url, Type classType, Map<String,String> headers, Object body) {
+    public static Object doPost(String url, Type classType, Map<String,String> headers, Object body) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('POST').setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
-    global static Object doDelete(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
+    public static Object doDelete(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('DELETE').setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config, classType);
     }
 
-    global static Object doGet(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
+    public static Object doGet(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('GET').setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config, classType);
     }
 
-    global static Object request(HttpClientConfig config, Type classType) {
+    public static Object request(HttpClientConfig config, Type classType) {
         HttpResponse response = request(config);
         Object retorno = jsonDeserializer(response.getBody(), classType);
 
         return retorno;
     }
 
-    global static HttpResponse request(HttpClientConfig config) {
+    public static HttpResponse request(HttpClientConfig config) {
         validateHttpClientConfig(config);
 
         HttpRequest request = new HttpRequest();

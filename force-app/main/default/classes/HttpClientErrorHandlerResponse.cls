@@ -1,10 +1,10 @@
-global class HttpClientErrorHandlerResponse {
+public class HttpClientErrorHandlerResponse {
     private String responseBody;
     private Integer statusCode;
     private String status;
     private HttpResponse response;
 
-    global HttpClientErrorHandlerResponse(HttpResponse response) {
+    public HttpClientErrorHandlerResponse(HttpResponse response) {
         this.responseBody = response.getBody();
         this.statusCode = response.getStatusCode();
         this.status = response.getStatus();
