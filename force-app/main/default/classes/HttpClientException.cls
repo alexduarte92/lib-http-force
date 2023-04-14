@@ -1,12 +1,12 @@
-public class HttpClientException extends Exception {
+global class HttpClientException extends Exception {
     private HttpClientErrorHandlerResponse httpErrorResponse;
 
-    public HttpClientException(String message, HttpClientErrorHandlerResponse httpErrorResponse) {
+    global HttpClientException(String message, HttpClientErrorHandlerResponse httpErrorResponse) {
       this(message);
       this.httpErrorResponse = httpErrorResponse;
     }
 
-    public HttpClientErrorHandlerResponse getHttpErrorResponse() {
+    global HttpClientErrorHandlerResponse getHttpErrorResponse() {
       return this.httpErrorResponse;
     }
 }

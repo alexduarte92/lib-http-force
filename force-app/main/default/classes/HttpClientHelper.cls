@@ -1,4 +1,4 @@
-public class HttpClientHelper {
+global class HttpClientHelper {
     @TestVisible
     private static final List<String> ALLOWED_HTTP_METHODS = new List<String>{'GET', 'POST', 'PUT', 'PATCH', 'DELETE'};
     @TestVisible
@@ -6,7 +6,7 @@ public class HttpClientHelper {
     @TestVisible
     private static final String HEADER_URL_ENCODED = 'application/x-www-form-urlencoded';
 
-    public static Boolean headersHasContentTypeFormUrlEncoded(Map<String,String> headers) {
+    global static Boolean headersHasContentTypeFormUrlEncoded(Map<String,String> headers) {
         Boolean isUrlEncoded = false;
         for (String key : headers.keySet()) {
             if (key.equalsIgnoreCase(HEADER_CONTENT_TYPE)) {
@@ -20,31 +20,31 @@ public class HttpClientHelper {
         return isUrlEncoded;
     }
 
-    public static Boolean validAllowedHttpMethods(HttpClientConfig httpClientConfig) {
+    global static Boolean validAllowedHttpMethods(HttpClientConfig httpClientConfig) {
         return ALLOWED_HTTP_METHODS.contains(httpClientConfig.getMethod().toUpperCase());
     }
 
-    public static Boolean urlIsBlank(HttpClientConfig httpClientConfig) {
+    global static Boolean urlIsBlank(HttpClientConfig httpClientConfig) {
         return String.isBlank(httpClientConfig.getUrl());
     }
 
-    public static Boolean bodyIsBlob(HttpClientConfig httpClientConfig) {
+    global static Boolean bodyIsBlob(HttpClientConfig httpClientConfig) {
         return httpClientConfig.getBody() instanceof Blob;
     }
 
-    public static Boolean bodyIsString(HttpClientConfig httpClientConfig) {
+    global static Boolean bodyIsString(HttpClientConfig httpClientConfig) {
         return httpClientConfig.getBody() instanceof String;
     }
 
-    public static Boolean objectIsMapStringString(Object body) {
+    global static Boolean objectIsMapStringString(Object body) {
         return body instanceof Map<String,String>;
     }
 
-    public static Boolean objectIsNull(Object body) {
+    global static Boolean objectIsNull(Object body) {
         return body == null;
     }
 
-    public static String getAllowedHttpMethods() {
+    global static String getAllowedHttpMethods() {
         return String.join(ALLOWED_HTTP_METHODS, ', ');
     }
 }
