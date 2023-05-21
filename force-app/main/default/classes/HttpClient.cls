@@ -1,8 +1,20 @@
 global class HttpClient {
+    global static HttpResponse doPatch(String url, Map<String,String> headers, Object body) {
+        HttpClientConfig config = HttpClientConfig.builder().setMethod('PATCH').setUrl(url).setHeaders(headers).setBody(body).build();
+
+        return request(config);
+    }
+
     global static Object doPatch(String url, Type classType, Map<String,String> headers, Object body) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('PATCH').setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
+    }
+
+    global static HttpResponse doPut(String url, Map<String,String> headers, Object body) {
+        HttpClientConfig config = HttpClientConfig.builder().setMethod('PUT').setUrl(url).setHeaders(headers).setBody(body).build();
+
+        return request(config);
     }
 
     global static Object doPut(String url, Type classType, Map<String,String> headers, Object body) {
@@ -11,16 +23,34 @@ global class HttpClient {
         return request(config, classType);
     }
 
+    global static HttpResponse doPost(String url, Map<String,String> headers, Object body) {
+        HttpClientConfig config = HttpClientConfig.builder().setMethod('POST').setUrl(url).setHeaders(headers).setBody(body).build();
+
+        return request(config);
+    }
+
     global static Object doPost(String url, Type classType, Map<String,String> headers, Object body) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('POST').setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
+    global static HttpResponse doDelete(String url, Map<String,String> headers, Map<String,String> params) {
+        HttpClientConfig config = HttpClientConfig.builder().setMethod('DELETE').setUrl(url).setHeaders(headers).setParams(params).build();
+
+        return request(config);
+    }
+
     global static Object doDelete(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
         HttpClientConfig config = HttpClientConfig.builder().setMethod('DELETE').setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config, classType);
+    }
+
+    global static HttpResponse doGet(String url, Map<String,String> headers, Map<String,String> params) {
+        HttpClientConfig config = HttpClientConfig.builder().setMethod('GET').setUrl(url).setHeaders(headers).setParams(params).build();
+
+        return request(config);
     }
 
     global static Object doGet(String url, Type classType, Map<String,String> headers, Map<String,String> params) {

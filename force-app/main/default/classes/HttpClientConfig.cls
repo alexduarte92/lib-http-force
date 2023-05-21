@@ -35,6 +35,14 @@ global class HttpClientConfig {
         return this.timeout;
     }
 
+    global HttpResponse request() {
+        return HttpClient.request(this);
+    }
+
+    global Object request(Type classType) {
+        return HttpClient.request(this, classType);
+    }
+
     global static Builder builder() {
         return new Builder();
     }

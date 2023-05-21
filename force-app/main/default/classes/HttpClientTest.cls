@@ -361,6 +361,8 @@ public class HttpClientTest {
             .build();
         
         Map<String,String> response = (Map<String,String>) HttpClient.request(config,Map<String,String>.class);
+        config.request();
+        config.request(Map<String,String>.class);
         Test.stopTest();
     }
 
@@ -411,6 +413,7 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
                 Map<String,String> response = (Map<String,String>) HttpClient.doPost(url, Map<String,String>.class, headers, body);
+                HttpResponse responseHttp = HttpClient.doPost(url, headers, body);
         Test.stopTest();
     }
 
@@ -429,6 +432,7 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
                 Map<String,String> response = (Map<String,String>) HttpClient.doPut(url, Map<String,String>.class, headers, body);
+                HttpResponse responseHttp = HttpClient.doPut(url, headers, body);
         Test.stopTest();
     }
 
@@ -447,6 +451,7 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
                 Map<String,String> response = (Map<String,String>) HttpClient.doPatch(url, Map<String,String>.class, headers, body);
+                HttpResponse responseHttp = HttpClient.doPatch(url, headers, body);
         Test.stopTest();
     }
 
@@ -465,6 +470,7 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
             Map<String,String> response = (Map<String,String>) HttpClient.doGet(url, Map<String,String>.class, headers, params);
+            HttpResponse responseHttp = HttpClient.doGet(url, headers, params);
         Test.stopTest();
     }
 
@@ -483,6 +489,7 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
             Map<String,String> response = (Map<String,String>) HttpClient.doDelete(url, Map<String,String>.class, headers, params);
+            HttpResponse responseHttp = HttpClient.doDelete(url, headers, params);
         Test.stopTest();
     }
 
