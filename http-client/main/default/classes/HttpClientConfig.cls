@@ -35,6 +35,10 @@ global class HttpClientConfig {
         return this.timeout;
     }
 
+    global NamedCredential getNamedCredential() {
+        return this.namedCredential;
+    }
+
     global HttpResponse request() {
         return HttpClient.request(this);
     }
@@ -59,6 +63,7 @@ global class HttpClientConfig {
         private Object body;
         private Boolean sendBodyAsBlob;
         private Integer timeout;
+        private NamedCredential namedCredential;
 
         global Builder(HttpClientConfig config) {
             this.fromHttpClientConfig(config);
@@ -117,6 +122,11 @@ global class HttpClientConfig {
             return this;
         }
 
+        global Builder setNamedCredential(NamedCredential namedCredential) {
+            this.namedCredential = namedCredential;
+            return this;
+        }
+
         private void fromHttpClientConfig(HttpClientConfig config) {
             this.url = config.getUrl();
             this.method = config.getMethod();
@@ -125,6 +135,7 @@ global class HttpClientConfig {
             this.body = config.getBody();
             this.sendBodyAsBlob = config.getSendBodyAsBlob();
             this.timeout = config.getTimeout();
+            this.namedCredential = config.getNamedCredential();
         }
 
         global HttpClientConfig build() {
@@ -136,6 +147,7 @@ global class HttpClientConfig {
             config.body = this.body;
             config.sendBodyAsBlob = this.sendBodyAsBlob;
             config.timeout = this.timeout;
+            config.namedCredential = this.namedCredential;
             return config;
         }
     }
