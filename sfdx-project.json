@@ -1,8 +1,10 @@
 {
   "packageDirectories": [
     {
-      "path": "http-client",
-      "default": true
+      "path": "./http-client",
+      "default": true,
+      "package": "HTTPClient",
+      "versionNumber": "0.0.1-BETA"
     }
   ],
   "name": "lib-http-sf",

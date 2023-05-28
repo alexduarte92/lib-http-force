@@ -6,6 +6,8 @@ global class HttpClientConfig {
     private Object body;
     private Boolean sendBodyAsBlob;
     private Integer timeout;
+    private String namedCredentialDeveloperName;
+    private String namedCredentialPath;
 
     global String getUrl() {
         return this.url;
@@ -35,8 +37,12 @@ global class HttpClientConfig {
         return this.timeout;
     }
 
-    global NamedCredential getNamedCredential() {
-        return this.namedCredential;
+    global String getNamedCredentialDeveloperName() {
+        return this.namedCredentialDeveloperName;
+    }
+
+    global String getNamedCredentialPath() {
+        return this.namedCredentialPath;
     }
 
     global HttpResponse request() {
@@ -63,7 +69,8 @@ global class HttpClientConfig {
         private Object body;
         private Boolean sendBodyAsBlob;
         private Integer timeout;
-        private NamedCredential namedCredential;
+        private String namedCredentialDeveloperName;
+        private String namedCredentialPath;
 
         global Builder(HttpClientConfig config) {
             this.fromHttpClientConfig(config);
@@ -123,8 +130,25 @@ global class HttpClientConfig {
         }
 
         global Builder setNamedCredential(NamedCredential namedCredential) {
-            this.namedCredential = namedCredential;
+            this.setNamedCredentialDeveloperName(namedCredential.DeveloperName);
             return this;
+        }
+
+        global Builder setNamedCredentialDeveloperName(String namedCredentialDeveloperName) {
+            this.namedCredentialDeveloperName = namedCredentialDeveloperName;
+            return this;
+        }
+
+        global Builder setNamedCredentialPath(String namedCredentialPath) {
+            this.namedCredentialPath = namedCredentialPath;
+            return this;
+        }
+
+        private String generateUrlParam() {
+            if(this.namedCredentialDeveloperName != null && this.namedCredentialPath != null) {
+                return String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath});
+            }
+            return this.url;
         }
 
         private void fromHttpClientConfig(HttpClientConfig config) {
@@ -135,19 +159,17 @@ global class HttpClientConfig {
             this.body = config.getBody();
             this.sendBodyAsBlob = config.getSendBodyAsBlob();
             this.timeout = config.getTimeout();
-            this.namedCredential = config.getNamedCredential();
         }
 
         global HttpClientConfig build() {
             HttpClientConfig config = new HttpClientConfig();
-            config.url = this.url;
+            config.url = this.generateUrlParam();
             config.method = this.method;
             config.headers = this.headers;
             config.params = this.params;
             config.body = this.body;
             config.sendBodyAsBlob = this.sendBodyAsBlob;
             config.timeout = this.timeout;
-            config.namedCredential = this.namedCredential;
             return config;
         }
     }
