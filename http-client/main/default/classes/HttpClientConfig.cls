@@ -102,7 +102,7 @@ global class HttpClientConfig {
         global Builder setMethod(String method) {
             this.method = method;
             return this;
-        }
+        } 
 
         global Builder setHeaders(Map<String,String> headers) {
             this.headers.putAll(headers);
