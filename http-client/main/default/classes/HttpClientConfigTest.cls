@@ -53,5 +53,7 @@ public class HttpClientConfigTest {
             .build();
         
         HttpClientConfig config_new = HttpClientConfig.builder(config).build();
+
+        System.assertEquals(config, config_new);
     }
 }
