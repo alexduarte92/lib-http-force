@@ -89,6 +89,16 @@ global class HttpClientConfig {
             return this;
         }
 
+        global Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
+            return this.setUrl(namedCredential.DeveloperName, namedCredentialPath);
+        }
+
+        global Builder setUrl(String namedCredentialDeveloperName, String namedCredentialPath) {
+            this.namedCredentialDeveloperName = namedCredentialDeveloperName;
+            this.namedCredentialPath = namedCredentialPath;
+            return this.setUrl(String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath}));
+        }
+
         global Builder setMethod(String method) {
             this.method = method;
             return this;
@@ -127,17 +137,6 @@ global class HttpClientConfig {
         global Builder setTimeout(Integer timeout) {
             this.timeout = timeout;
             return this;
-        }
-
-        global Builder setNamedCredential(NamedCredential namedCredential, String namedCredentialPath) {
-            this.setNamedCredentialDeveloperName(namedCredential.DeveloperName, namedCredentialPath);
-            return this;
-        }
-
-        global Builder setNamedCredentialDeveloperName(String namedCredentialDeveloperName, String namedCredentialPath) {
-            this.namedCredentialDeveloperName = namedCredentialDeveloperName;
-            this.namedCredentialPath = namedCredentialPath;
-            return this.setUrl(String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath}));
         }
 
         private void fromHttpClientConfig(HttpClientConfig config) {
