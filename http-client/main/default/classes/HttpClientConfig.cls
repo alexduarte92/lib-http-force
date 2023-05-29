@@ -147,6 +147,8 @@ global class HttpClientConfig {
             this.body = config.getBody();
             this.sendBodyAsBlob = config.getSendBodyAsBlob();
             this.timeout = config.getTimeout();
+            this.namedCredentialDeveloperName = config.getNamedCredentialDeveloperName();
+            this.namedCredentialPath = config.getNamedCredentialPath();
         }
 
         global HttpClientConfig build() {
