@@ -129,26 +129,15 @@ global class HttpClientConfig {
             return this;
         }
 
-        global Builder setNamedCredential(NamedCredential namedCredential) {
-            this.setNamedCredentialDeveloperName(namedCredential.DeveloperName);
+        global Builder setNamedCredential(NamedCredential namedCredential, String namedCredentialPath) {
+            this.setNamedCredentialDeveloperName(namedCredential.DeveloperName, namedCredentialPath);
             return this;
         }
 
-        global Builder setNamedCredentialDeveloperName(String namedCredentialDeveloperName) {
+        global Builder setNamedCredentialDeveloperName(String namedCredentialDeveloperName, String namedCredentialPath) {
             this.namedCredentialDeveloperName = namedCredentialDeveloperName;
-            return this;
-        }
-
-        global Builder setNamedCredentialPath(String namedCredentialPath) {
             this.namedCredentialPath = namedCredentialPath;
-            return this;
-        }
-
-        private String generateUrlParam() {
-            if(this.namedCredentialDeveloperName != null && this.namedCredentialPath != null) {
-                return String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath});
-            }
-            return this.url;
+            return this.setUrl(String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath}));
         }
 
         private void fromHttpClientConfig(HttpClientConfig config) {
@@ -163,7 +152,7 @@ global class HttpClientConfig {
 
         global HttpClientConfig build() {
             HttpClientConfig config = new HttpClientConfig();
-            config.url = this.generateUrlParam();
+            config.url = this.url;
             config.method = this.method;
             config.headers = this.headers;
             config.params = this.params;
