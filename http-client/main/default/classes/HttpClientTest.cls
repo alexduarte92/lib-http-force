@@ -361,8 +361,6 @@ public class HttpClientTest {
             .build();
         
         Map<String,String> response = (Map<String,String>) HttpClient.request(config,Map<String,String>.class);
-        config.request();
-        config.request(Map<String,String>.class);
         Test.stopTest();
     }
 

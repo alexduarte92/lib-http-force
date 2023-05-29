@@ -1,12 +1,15 @@
 {
   "packageDirectories": [
     {
-      "path": "force-app",
-      "default": true
+      "path": "http-client",
+      "default": true,
+      "package": "http-client",
+      "versionNumber": "0.0.1-BETA",
+      "versionName": "0.0.1"
     }
   ],
-  "name": "lib-http-sf",
+  "name": "HttpClient",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "56.0"
+  "sourceApiVersion": "57.0"
 }

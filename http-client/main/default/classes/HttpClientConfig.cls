@@ -6,6 +6,8 @@ global class HttpClientConfig {
     private Object body;
     private Boolean sendBodyAsBlob;
     private Integer timeout;
+    private String namedCredentialDeveloperName;
+    private String namedCredentialPath;
 
     global String getUrl() {
         return this.url;
@@ -35,6 +37,14 @@ global class HttpClientConfig {
         return this.timeout;
     }
 
+    global String getNamedCredentialDeveloperName() {
+        return this.namedCredentialDeveloperName;
+    }
+
+    global String getNamedCredentialPath() {
+        return this.namedCredentialPath;
+    }
+
     global HttpResponse request() {
         return HttpClient.request(this);
     }
@@ -59,6 +69,8 @@ global class HttpClientConfig {
         private Object body;
         private Boolean sendBodyAsBlob;
         private Integer timeout;
+        private String namedCredentialDeveloperName;
+        private String namedCredentialPath;
 
         global Builder(HttpClientConfig config) {
             this.fromHttpClientConfig(config);
@@ -75,6 +87,16 @@ global class HttpClientConfig {
         global Builder setUrl(String url) {
             this.url = url;
             return this;
+        }
+
+        global Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
+            return this.setUrl(namedCredential.DeveloperName, namedCredentialPath);
+        }
+
+        global Builder setUrl(String namedCredentialDeveloperName, String namedCredentialPath) {
+            this.namedCredentialDeveloperName = namedCredentialDeveloperName;
+            this.namedCredentialPath = namedCredentialPath;
+            return this.setUrl(String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath}));
         }
 
         global Builder setMethod(String method) {
@@ -136,6 +158,8 @@ global class HttpClientConfig {
             config.body = this.body;
             config.sendBodyAsBlob = this.sendBodyAsBlob;
             config.timeout = this.timeout;
+            config.namedCredentialDeveloperName = this.namedCredentialDeveloperName;
+            config.namedCredentialPath = this.namedCredentialPath;
             return config;
         }
     }

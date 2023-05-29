@@ -23,7 +23,6 @@ yarn-error.log*
 
 # Dependency directories
 node_modules/
-scripts/
 
 # Eslint cache
 .eslintcache
@@ -39,3 +38,8 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+
+# Python Salesforce Functions
+**/__pycache__/
+**/.venv/
+**/venv/
