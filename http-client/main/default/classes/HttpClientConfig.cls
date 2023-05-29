@@ -159,6 +159,8 @@ global class HttpClientConfig {
             config.body = this.body;
             config.sendBodyAsBlob = this.sendBodyAsBlob;
             config.timeout = this.timeout;
+            config.namedCredentialDeveloperName = this.namedCredentialDeveloperName;
+            config.namedCredentialPath = this.namedCredentialPath;
             return config;
         }
     }
