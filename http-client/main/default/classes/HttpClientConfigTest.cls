@@ -11,6 +11,7 @@ public class HttpClientConfigTest {
         Boolean sendBodyAsBlob = false;
         Integer timeout = 5000;
         
+        
         HttpClientConfig config = HttpClientConfig.builder()
             .setUrl(url)
             .setMethod(method)
