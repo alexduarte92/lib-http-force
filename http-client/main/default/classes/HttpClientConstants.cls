@@ -1,3 +1,2 @@
 global class HttpClientConstants{
-  
 }
