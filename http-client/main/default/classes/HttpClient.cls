@@ -153,7 +153,7 @@ global class HttpClient {
     @TestVisible
     private static void validateAllowedHttpMethods(HttpClientConfig config){
         if(!HttpClientHelper.validAllowedHttpMethods(config)) {
-            throw new HttpClientException('Método não permitido, permitidos: ' + httpClientHelper.getAllowedHttpMethods());
+            throw new HttpClientException('Método não permitido, permitidos: ' + HttpClientConstants.getAllowedHttpMethodsAsString());
         }
     }
 
