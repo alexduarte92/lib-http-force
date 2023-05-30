@@ -1,16 +1,9 @@
 global class HttpClientHelper {
-    @TestVisible
-    private static final List<String> ALLOWED_HTTP_METHODS = new List<String>{'GET', 'POST', 'PUT', 'PATCH', 'DELETE'};
-    @TestVisible
-    private static final String HEADER_CONTENT_TYPE = 'Content-Type';
-    @TestVisible
-    private static final String HEADER_URL_ENCODED = 'application/x-www-form-urlencoded';
-
     global static Boolean headersHasContentTypeFormUrlEncoded(Map<String,String> headers) {
         Boolean isUrlEncoded = false;
         for (String key : headers.keySet()) {
-            if (key.equalsIgnoreCase(HEADER_CONTENT_TYPE)) {
-                if(headers.get(key).equalsIgnoreCase(HEADER_URL_ENCODED)){
+            if (key.equalsIgnoreCase(HttpClientConstants.HEADER_CONTENT_TYPE)) {
+                if(headers.get(key).equalsIgnoreCase(HttpClientConstants.HEADER_URL_ENCODED)){
                     isUrlEncoded = true;
                     break;
                 }
@@ -21,7 +14,7 @@ global class HttpClientHelper {
     }
 
     global static Boolean validAllowedHttpMethods(HttpClientConfig httpClientConfig) {
-        return ALLOWED_HTTP_METHODS.contains(httpClientConfig.getMethod().toUpperCase());
+        return HttpClientConstants.ALLOWED_HTTP_METHODS.contains(httpClientConfig.getMethod().toUpperCase());
     }
 
     global static Boolean urlIsBlank(HttpClientConfig httpClientConfig) {
@@ -42,9 +35,5 @@ global class HttpClientHelper {
 
     global static Boolean objectIsNull(Object body) {
         return body == null;
-    }
-
-    global static String getAllowedHttpMethods() {
-        return String.join(ALLOWED_HTTP_METHODS, ', ');
     }
 }

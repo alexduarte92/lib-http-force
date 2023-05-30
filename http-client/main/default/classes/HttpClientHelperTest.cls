@@ -4,7 +4,7 @@ public class HttpClientHelperTest {
     @isTest
     static void testHeadersHasContentTypeFormUrlEncoded() {
         Map<String,String> headers = new Map<String,String>{
-            HttpClientHelper.HEADER_CONTENT_TYPE => HttpClientHelper.HEADER_URL_ENCODED
+            HttpClientConstants.HEADER_CONTENT_TYPE => HttpClientConstants.HEADER_URL_ENCODED
         };
         System.assertEquals(true, HttpClientHelper.headersHasContentTypeFormUrlEncoded(headers));
     }
@@ -59,7 +59,7 @@ public class HttpClientHelperTest {
 
     @isTest
     static void testGetAllowedHttpMethods() {
-        String allowedMethods = HttpClientHelper.getAllowedHttpMethods();
+        String allowedMethods = HttpClientConstants.getAllowedHttpMethodsAsString();
         System.assertEquals('GET, POST, PUT, PATCH, DELETE', allowedMethods);
     }
 }
