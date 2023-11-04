@@ -69,12 +69,7 @@ global class HttpClient {
     global static HttpResponse request(HttpClientConfig config) {
         validateHttpClientConfig(config);
 
-        HttpRequest request = new HttpRequest();
-        setEndpoint(request, config);
-        setHttpHeader(request, config);
-        setBody(request, config);
-        request.setMethod(config.getMethod().toUpperCase());
-        request.setTimeout(config.getTimeout());
+        HttpRequest request = buildHttpRequest(config);
 
         Http http = new Http();
 
@@ -83,6 +78,17 @@ global class HttpClient {
         validateHttpResponse(response);
         
         return response;
+    }
+
+    private static HttpRequest buildHttpRequest(HttpClientConfig config) {
+        HttpRequest request = new HttpRequest();
+        setEndpoint(request, config);
+        setHttpHeader(request, config);
+        setBody(request, config);
+        request.setMethod(config.getMethod().toUpperCase());
+        request.setTimeout(config.getTimeout());
+
+        return request;
     }
 
     @TestVisible
@@ -153,14 +159,14 @@ global class HttpClient {
     @TestVisible
     private static void validateAllowedHttpMethods(HttpClientConfig config){
         if(!HttpClientHelper.validAllowedHttpMethods(config)) {
-            throw new HttpClientException('Método não permitido, permitidos: ' + HttpClientConstants.getAllowedHttpMethodsAsString());
+            throw new HttpClientException('Método não permitido, permitidos: ' + HttpClientConstants.getAllowedHttpMethodsAsString(), new HttpClientErrorHandlerResponse());
         }
     }
 
     @TestVisible
     private static void validateUrlIsBlank(HttpClientConfig config){
         if(HttpClientHelper.urlIsBlank(config)) {
-            throw new HttpClientException('URL não deve ser nula ou vazia!');
+            throw new HttpClientException('URL não deve ser nula ou vazia!', new HttpClientErrorHandlerResponse());
         }
     }
 
@@ -171,7 +177,7 @@ global class HttpClient {
         }
 
         if(!HttpClientHelper.objectIsMapStringString(config.getBody())){
-            throw new HttpClientException('Para requisição x-www-form-urlencoded o body deve ser do tipo Map<String,String>!');
+            throw new HttpClientException('Para requisição x-www-form-urlencoded o body deve ser do tipo Map<String,String>!', new HttpClientErrorHandlerResponse());
         }
     }
 

@@ -8,6 +8,7 @@ global class HttpClientConfig {
     private Integer timeout;
     private String namedCredentialDeveloperName;
     private String namedCredentialPath;
+    private Integer retries;
 
     global String getUrl() {
         return this.url;
@@ -45,6 +46,10 @@ global class HttpClientConfig {
         return this.namedCredentialPath;
     }
 
+    global Integer getRetries() {
+        return this.retries;
+    }
+
     global HttpResponse request() {
         return HttpClient.request(this);
     }
@@ -71,6 +76,7 @@ global class HttpClientConfig {
         private Integer timeout;
         private String namedCredentialDeveloperName;
         private String namedCredentialPath;
+        private Integer retries;
 
         global Builder(HttpClientConfig config) {
             this.fromHttpClientConfig(config);
@@ -82,6 +88,7 @@ global class HttpClientConfig {
             this.sendBodyAsBlob = false;
             this.method = 'GET';
             this.timeout = 12000;
+            this.retries = 1;
         }
 
         global Builder setUrl(String url) {
@@ -139,6 +146,11 @@ global class HttpClientConfig {
             return this;
         }
 
+        global Builder setRetries(Integer retries) {
+            this.retries = retries;
+            return this;
+        }
+
         private void fromHttpClientConfig(HttpClientConfig config) {
             this.url = config.getUrl();
             this.method = config.getMethod();
@@ -149,6 +161,7 @@ global class HttpClientConfig {
             this.timeout = config.getTimeout();
             this.namedCredentialDeveloperName = config.getNamedCredentialDeveloperName();
             this.namedCredentialPath = config.getNamedCredentialPath();
+            this.retries = config.getRetries();
         }
 
         global HttpClientConfig build() {
@@ -162,6 +175,7 @@ global class HttpClientConfig {
             config.timeout = this.timeout;
             config.namedCredentialDeveloperName = this.namedCredentialDeveloperName;
             config.namedCredentialPath = this.namedCredentialPath;
+            config.retries = this.retries;
             return config;
         }
     }

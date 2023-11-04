@@ -18,10 +18,13 @@ public class HttpClientTest {
             .setUrl(url)
             .setMethod(method)
             .setHeaders(headers)
+            .addHeader('SF-Header', 'true')
             .setParams(params)
+            .addParam('paramTest', 'paramTest')
             .setBody(body)
             .setSendBodyAsBlob(sendBodyAsBlob)
             .setTimeout(timeout)
+            .setRetries(2)
             .build();
         
         HttpClient.request(config);
@@ -81,6 +84,7 @@ public class HttpClientTest {
             HttpClient.request(config);
         } catch (HttpClientException e) {
             System.debug(e.getMessage());
+            System.debug(e.getHttpErrorResponse().getResponse());
         }
         Test.stopTest();
     }

@@ -4,6 +4,13 @@ global class HttpClientErrorHandlerResponse {
     private String status;
     private HttpResponse response;
 
+    global HttpClientErrorHandlerResponse() {
+        this.responseBody = '';
+        this.statusCode = 0;
+        this.status = '';
+        this.response = null;
+    }
+
     global HttpClientErrorHandlerResponse(HttpResponse response) {
         this.responseBody = response.getBody();
         this.statusCode = response.getStatusCode();
