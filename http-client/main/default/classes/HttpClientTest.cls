@@ -326,6 +326,7 @@ public class HttpClientTest {
             .setBody(JSON.serialize(body))
             .setSendBodyAsBlob(sendBodyAsBlob)
             .setTimeout(timeout)
+            .setRetries(3)
             .build();
         
             try {

@@ -67,16 +67,33 @@ global class HttpClient {
     }
 
     global static HttpResponse request(HttpClientConfig config) {
+        Integer retries = 1;
+
         validateHttpClientConfig(config);
 
         HttpRequest request = buildHttpRequest(config);
 
         Http http = new Http();
 
-        HttpResponse response = http.send(request);
-
-        validateHttpResponse(response);
+        HttpResponse response = new HttpResponse();
         
+        while (retries <= config.getRetries()) {
+            try{
+                System.debug('[CALLOUT-HTTP-CLIENT] Realizando chamada de tentativa número ' + retries);
+                response = http.send(request);
+
+                validateHttpResponse(response);
+
+                return response;
+            } catch (Exception e) {
+                if(retries == config.getRetries()) {
+                    System.debug('[CALLOUT-HTTP-CLIENT] Tentativas foram excedidas, uma exceção será lançada.');
+                    throw e;
+                }
+            } finally {
+                retries++;
+            }
+        }
         return response;
     }
 
