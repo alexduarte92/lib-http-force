@@ -1,6 +1,6 @@
 global class HttpClientException extends Exception {
-    private HttpClientErrorHandlerResponse httpErrorResponse;
-
+    private HttpClientErrorHandlerResponse httpErrorResponse = new HttpClientErrorHandlerResponse();
+    
     global HttpClientException(String message, HttpClientErrorHandlerResponse httpErrorResponse) {
       this(message);
       this.httpErrorResponse = httpErrorResponse;

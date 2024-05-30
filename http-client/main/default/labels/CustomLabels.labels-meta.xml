@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>URL_ENCODED_CONTENT_TYPE_REQUIREMENT</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>URL_ENCODED_CONTENT_TYPE_REQUIREMENT</shortDescription>
+        <value>To make requests with a Content-Type of application/x-www-form-urlencoded, the body must be of type Map&lt;String, String&gt;.</value>
+    </labels>
+    <labels>
+        <fullName>URL_MUST_NOT_BE_NULL_OR_EMPTY</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>URL_MUST_NOT_BE_NULL_OR_EMPTY</shortDescription>
+        <value>The URL must not be null or empty.</value>
+    </labels>
+    <labels>
+        <fullName>HTTP_METHOD_NOT_ALLOWED</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HTTP_METHOD_NOT_ALLOWED</shortDescription>
+        <value>HTTP method not allowed. Allowed methods: </value>
+    </labels>
+    <labels>
+        <fullName>ERROR_MAKING_REQUEST</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ERROR_MAKING_REQUEST</shortDescription>
+        <value>Error making the request.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_DESERIALIZING_JSON</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ERROR_DESERIALIZING_JSON</shortDescription>
+        <value>Error deserializing the JSON. Error: </value>
+    </labels>
+    <labels>
+        <fullName>REQUEST_ATTEMPTS_EXCEEDED</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>REQUEST_ATTEMPTS_EXCEEDED</shortDescription>
+        <value>Request attempts exceeded.</value>
+    </labels>
+    <labels>
+        <fullName>PERFORMING_REQUEST_ATTEMPT</fullName>
+        <categories>HttpClient Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PERFORMING_REQUEST_ATTEMPT</shortDescription>
+        <value>Performing request attempt number: </value>
+    </labels>
+</CustomLabels>

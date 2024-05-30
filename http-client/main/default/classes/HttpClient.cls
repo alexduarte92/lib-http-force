@@ -1,60 +1,60 @@
 global class HttpClient {
     global static HttpResponse doPatch(String url, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('PATCH').setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PATCH).setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config);
     }
 
     global static Object doPatch(String url, Type classType, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('PATCH').setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PATCH).setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
     global static HttpResponse doPut(String url, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('PUT').setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PUT).setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config);
     }
 
     global static Object doPut(String url, Type classType, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('PUT').setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PUT).setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
     global static HttpResponse doPost(String url, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('POST').setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_POST).setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config);
     }
 
     global static Object doPost(String url, Type classType, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('POST').setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_POST).setUrl(url).setHeaders(headers).setBody(body).build();
 
         return request(config, classType);
     }
 
     global static HttpResponse doDelete(String url, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('DELETE').setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_DELETE).setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config);
     }
 
     global static Object doDelete(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('DELETE').setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_DELETE).setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config, classType);
     }
 
     global static HttpResponse doGet(String url, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('GET').setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_GET).setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config);
     }
 
     global static Object doGet(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod('GET').setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_GET).setUrl(url).setHeaders(headers).setParams(params).build();
 
         return request(config, classType);
     }
@@ -79,7 +79,7 @@ global class HttpClient {
         
         while (retries <= config.getRetries()) {
             try{
-                System.debug('[CALLOUT-HTTP-CLIENT] Realizando chamada de tentativa número ' + retries);
+                System.debug(System.Label.PERFORMING_REQUEST_ATTEMPT + retries);
                 response = http.send(request);
 
                 validateHttpResponse(response);
@@ -87,7 +87,7 @@ global class HttpClient {
                 return response;
             } catch (Exception e) {
                 if(retries == config.getRetries()) {
-                    System.debug('[CALLOUT-HTTP-CLIENT] Tentativas foram excedidas, uma exceção será lançada.');
+                    System.debug(System.Label.REQUEST_ATTEMPTS_EXCEEDED);
                     throw e;
                 }
             } finally {
@@ -115,7 +115,7 @@ global class HttpClient {
         try {
             objectReturn = JSON.deserialize(objectToDeserialize,classType);
         } catch (Exception e) {
-            throw new JSONException('Erro ao realizar deserialize do JSON. Erro: ' + e.getMessage());
+            throw new JSONException(System.Label.ERROR_DESERIALIZING_JSON + e.getMessage());
         }
 
         return objectReturn;
@@ -141,7 +141,7 @@ global class HttpClient {
     @TestVisible
     private static void setBody(HttpRequest request, HttpClientConfig config) {
         if(HttpClientHelper.objectIsNull(config.getBody())) {
-            request.setHeader('Content-Length', '0');
+            request.setHeader(HttpClientConstants.HEADER_CONTENT_LENGTH, '0');
             return;
         }
 
@@ -162,7 +162,7 @@ global class HttpClient {
     @TestVisible
     private static void validateHttpResponse(HttpResponse response) {
         if(response.getStatusCode() > 299) {
-            throw new HttpClientException('Erro ao realizar a chamada', new HttpClientErrorHandlerResponse(response));
+            throw new HttpClientException(System.Label.ERROR_MAKING_REQUEST, new HttpClientErrorHandlerResponse(response));
         }
     }
 
@@ -176,14 +176,14 @@ global class HttpClient {
     @TestVisible
     private static void validateAllowedHttpMethods(HttpClientConfig config){
         if(!HttpClientHelper.validAllowedHttpMethods(config)) {
-            throw new HttpClientException('Método não permitido, permitidos: ' + HttpClientConstants.getAllowedHttpMethodsAsString(), new HttpClientErrorHandlerResponse());
+            throw new HttpClientException(System.Label.HTTP_METHOD_NOT_ALLOWED + HttpClientConstants.getAllowedHttpMethodsAsString());
         }
     }
 
     @TestVisible
     private static void validateUrlIsBlank(HttpClientConfig config){
         if(HttpClientHelper.urlIsBlank(config)) {
-            throw new HttpClientException('URL não deve ser nula ou vazia!', new HttpClientErrorHandlerResponse());
+            throw new HttpClientException(System.Label.URL_MUST_NOT_BE_NULL_OR_EMPTY);
         }
     }
 
@@ -194,7 +194,7 @@ global class HttpClient {
         }
 
         if(!HttpClientHelper.objectIsMapStringString(config.getBody())){
-            throw new HttpClientException('Para requisição x-www-form-urlencoded o body deve ser do tipo Map<String,String>!', new HttpClientErrorHandlerResponse());
+            throw new HttpClientException(System.Label.URL_ENCODED_CONTENT_TYPE_REQUIREMENT);
         }
     }
 
@@ -202,7 +202,7 @@ global class HttpClient {
     private static String paramsToQueryString(Map<String, String> params) {    
         List<String> elements = new List<String>();
         for (String key : params.keySet()) {
-            elements.add(EncodingUtil.urlEncode(key, 'UTF-8') + '=' + EncodingUtil.urlEncode(params.get(key), 'UTF-8'));
+            elements.add(EncodingUtil.urlEncode(key, HttpClientConstants.UTF8) + '=' + EncodingUtil.urlEncode(params.get(key), HttpClientConstants.UTF8));
         }
     
         return String.join(elements, '&');
