@@ -120,15 +120,4 @@ public class HttpClientConfigTest {
         config.request(Map<String,String>.class);
         Test.stopTest();
     }
-    
-    @isTest
-    static void testGetNamedCredentialDeveloperNameNull() {
-        HttpClientConfig config = new HttpClientConfig();
-
-        Test.startTest();
-        String developerName = config.getNamedCredentialDeveloperName();
-        Test.stopTest();
-
-        Assert.areEqual(null, developerName);
-    }
 }

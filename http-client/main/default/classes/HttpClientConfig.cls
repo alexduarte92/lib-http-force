@@ -1,54 +1,38 @@
 public class HttpClientConfig {
-    private String url;
-    private String method;
-    private Map<String,String> headers;
-    private Map<String,String> params;
-    private Object body;
-    private Boolean sendBodyAsBlob;
-    private Integer timeout;
-    private String namedCredentialDeveloperName;
-    private String namedCredentialPath;
-    private Integer retries;
+    private final String url;
+    private final String method;
+    private final Map<String, String> headers;
+    private final Map<String, String> params;
+    private final Object body;
+    private final Boolean sendBodyAsBlob;
+    private final Integer timeout;
+    private final String namedCredentialDeveloperName;
+    private final String namedCredentialPath;
+    private final Integer retries;
 
-    public String getUrl() {
-        return this.url;
+    private HttpClientConfig(Builder builder) {
+        this.url = builder.url;
+        this.method = builder.method;
+        this.headers = builder.headers;
+        this.params = builder.params;
+        this.body = builder.body;
+        this.sendBodyAsBlob = builder.sendBodyAsBlob;
+        this.timeout = builder.timeout;
+        this.namedCredentialDeveloperName = builder.namedCredentialDeveloperName;
+        this.namedCredentialPath = builder.namedCredentialPath;
+        this.retries = builder.retries;
     }
 
-    public String getMethod() {
-        return this.method;
-    }
-
-    public Map<String,String> getHeaders() {
-        return this.headers;
-    }
-
-    public Map<String,String> getParams() {
-        return this.params;
-    }
-
-    public Object getBody() {
-        return this.body;
-    }
-
-    public Boolean getSendBodyAsBlob() {
-        return this.sendBodyAsBlob;
-    }
-
-    public Integer getTimeout() {
-        return this.timeout;
-    }
-
-    public String getNamedCredentialDeveloperName() {
-        return this.namedCredentialDeveloperName;
-    }
-
-    public String getNamedCredentialPath() {
-        return this.namedCredentialPath;
-    }
-
-    public Integer getRetries() {
-        return this.retries;
-    }
+    public String getUrl() { return this.url; }
+    public String getMethod() { return this.method; }
+    public Map<String, String> getHeaders() { return this.headers; }
+    public Map<String, String> getParams() { return this.params; }
+    public Object getBody() { return this.body; }
+    public Boolean getSendBodyAsBlob() { return this.sendBodyAsBlob; }
+    public Integer getTimeout() { return this.timeout; }
+    public String getNamedCredentialDeveloperName() { return this.namedCredentialDeveloperName; }
+    public String getNamedCredentialPath() { return this.namedCredentialPath; }
+    public Integer getRetries() { return this.retries; }
 
     public HttpResponse request() {
         return HttpClient.request(this);
@@ -69,26 +53,28 @@ public class HttpClientConfig {
     public class Builder {
         private String url;
         private String method;
-        private Map<String,String> headers;
-        private Map<String,String> params;
+        private Map<String, String> headers = new Map<String, String>();
+        private Map<String, String> params = new Map<String, String>();
         private Object body;
-        private Boolean sendBodyAsBlob;
-        private Integer timeout;
+        private Boolean sendBodyAsBlob = false;
+        private Integer timeout = 12000;
         private String namedCredentialDeveloperName;
         private String namedCredentialPath;
-        private Integer retries;
+        private Integer retries = 1;
+
+        public Builder() {}
 
         public Builder(HttpClientConfig config) {
-            this.fromHttpClientConfig(config);
-        }
-
-        public Builder() {
-            this.headers = new Map<String,String>();
-            this.params = new Map<String,String>();
-            this.sendBodyAsBlob = false;
-            this.method = 'GET';
-            this.timeout = 12000;
-            this.retries = 1;
+            this.url = config.getUrl();
+            this.method = config.getMethod();
+            this.headers = new Map<String, String>(config.getHeaders());
+            this.params = new Map<String, String>(config.getParams());
+            this.body = config.getBody();
+            this.sendBodyAsBlob = config.getSendBodyAsBlob();
+            this.timeout = config.getTimeout();
+            this.namedCredentialDeveloperName = config.getNamedCredentialDeveloperName();
+            this.namedCredentialPath = config.getNamedCredentialPath();
+            this.retries = config.getRetries();
         }
 
         public Builder setUrl(String url) {
@@ -96,22 +82,24 @@ public class HttpClientConfig {
             return this;
         }
 
-        public Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
-            return this.setUrl(namedCredential.DeveloperName, namedCredentialPath);
+        public Builder setUrl(String namedCredential, String namedCredentialPath) {
+            this.namedCredentialDeveloperName = namedCredential;
+            this.namedCredentialPath = namedCredentialPath;
+            this.url = 'callout:' + this.namedCredentialDeveloperName + this.namedCredentialPath;
+            return this;
         }
 
-        public Builder setUrl(String namedCredentialDeveloperName, String namedCredentialPath) {
-            this.namedCredentialDeveloperName = namedCredentialDeveloperName;
-            this.namedCredentialPath = namedCredentialPath;
-            return this.setUrl(String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath}));
+        public Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
+            this.setUrl(namedCredential.DeveloperName, namedCredentialPath);
+            return this;
         }
 
         public Builder setMethod(String method) {
             this.method = method;
             return this;
-        } 
+        }
 
-        public Builder setHeaders(Map<String,String> headers) {
+        public Builder setHeaders(Map<String, String> headers) {
             this.headers.putAll(headers);
             return this;
         }
@@ -121,7 +109,7 @@ public class HttpClientConfig {
             return this;
         }
 
-        public Builder setParams(Map<String,String> params) {
+        public Builder setParams(Map<String, String> params) {
             this.params.putAll(params);
             return this;
         }
@@ -151,32 +139,8 @@ public class HttpClientConfig {
             return this;
         }
 
-        private void fromHttpClientConfig(HttpClientConfig config) {
-            this.url = config.getUrl();
-            this.method = config.getMethod();
-            this.headers = config.getHeaders();
-            this.params = config.getParams();
-            this.body = config.getBody();
-            this.sendBodyAsBlob = config.getSendBodyAsBlob();
-            this.timeout = config.getTimeout();
-            this.namedCredentialDeveloperName = config.getNamedCredentialDeveloperName();
-            this.namedCredentialPath = config.getNamedCredentialPath();
-            this.retries = config.getRetries();
-        }
-
         public HttpClientConfig build() {
-            HttpClientConfig config = new HttpClientConfig();
-            config.url = this.url;
-            config.method = this.method;
-            config.headers = this.headers;
-            config.params = this.params;
-            config.body = this.body;
-            config.sendBodyAsBlob = this.sendBodyAsBlob;
-            config.timeout = this.timeout;
-            config.namedCredentialDeveloperName = this.namedCredentialDeveloperName;
-            config.namedCredentialPath = this.namedCredentialPath;
-            config.retries = this.retries;
-            return config;
+            return new HttpClientConfig(this);
         }
     }
 }
