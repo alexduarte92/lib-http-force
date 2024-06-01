@@ -24,11 +24,11 @@ public class HttpClientConfigTest {
             .setTimeout(timeout)
             .build();
         
-        System.assertEquals(url, config.getUrl());
-        System.assertEquals(method, config.getMethod());
-        System.assertEquals(body, config.getBody());
-        System.assertEquals(sendBodyAsBlob, config.getSendBodyAsBlob());
-        System.assertEquals(timeout, config.getTimeout());
+        Assert.areEqual(url, config.getUrl());
+        Assert.areEqual(method, config.getMethod());
+        Assert.areEqual(body, config.getBody());
+        Assert.areEqual(sendBodyAsBlob, config.getSendBodyAsBlob());
+        Assert.areEqual(timeout, config.getTimeout());
     }
 
     @isTest
@@ -55,11 +55,11 @@ public class HttpClientConfigTest {
         
         HttpClientConfig config_new = HttpClientConfig.builder(config).build();
 
-        System.assertEquals(config_new.getUrl(), config.getUrl());
-        System.assertEquals(config_new.getMethod(), config.getMethod());
-        System.assertEquals(config_new.getBody(), config.getBody());
-        System.assertEquals(config_new.getSendBodyAsBlob(), config.getSendBodyAsBlob());
-        System.assertEquals(config_new.getTimeout(), config.getTimeout());
+        Assert.areEqual(config_new.getUrl(), config.getUrl());
+        Assert.areEqual(config_new.getMethod(), config.getMethod());
+        Assert.areEqual(config_new.getBody(), config.getBody());
+        Assert.areEqual(config_new.getSendBodyAsBlob(), config.getSendBodyAsBlob());
+        Assert.areEqual(config_new.getTimeout(), config.getTimeout());
     }
 
     @isTest
@@ -83,13 +83,13 @@ public class HttpClientConfigTest {
             .setTimeout(timeout)
             .build();
         
-        System.assertEquals('callout:CREDENTIALTESTE/path', config.getUrl());
-        System.assertEquals('CREDENTIALTESTE', config.getNamedCredentialDeveloperName());
-        System.assertEquals('/path', config.getNamedCredentialPath());
-        System.assertEquals(method, config.getMethod());
-        System.assertEquals(body, config.getBody());
-        System.assertEquals(sendBodyAsBlob, config.getSendBodyAsBlob());
-        System.assertEquals(timeout, config.getTimeout());
+        Assert.areEqual('callout:CREDENTIALTESTE/path', config.getUrl());
+        Assert.areEqual('CREDENTIALTESTE', config.getNamedCredentialDeveloperName());
+        Assert.areEqual('/path', config.getNamedCredentialPath());
+        Assert.areEqual(method, config.getMethod());
+        Assert.areEqual(body, config.getBody());
+        Assert.areEqual(sendBodyAsBlob, config.getSendBodyAsBlob());
+        Assert.areEqual(timeout, config.getTimeout());
     }
 
     @isTest
@@ -119,5 +119,16 @@ public class HttpClientConfigTest {
         config.request();
         config.request(Map<String,String>.class);
         Test.stopTest();
+    }
+    
+    @isTest
+    static void testGetNamedCredentialDeveloperNameNull() {
+        HttpClientConfig config = new HttpClientConfig();
+
+        Test.startTest();
+        String developerName = config.getNamedCredentialDeveloperName();
+        Test.stopTest();
+
+        Assert.areEqual(null, developerName);
     }
 }

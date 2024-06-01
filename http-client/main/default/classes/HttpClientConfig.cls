@@ -1,4 +1,4 @@
-global class HttpClientConfig {
+public class HttpClientConfig {
     private String url;
     private String method;
     private Map<String,String> headers;
@@ -10,63 +10,63 @@ global class HttpClientConfig {
     private String namedCredentialPath;
     private Integer retries;
 
-    global String getUrl() {
+    public String getUrl() {
         return this.url;
     }
 
-    global String getMethod() {
+    public String getMethod() {
         return this.method;
     }
 
-    global Map<String,String> getHeaders() {
+    public Map<String,String> getHeaders() {
         return this.headers;
     }
 
-    global Map<String,String> getParams() {
+    public Map<String,String> getParams() {
         return this.params;
     }
 
-    global Object getBody() {
+    public Object getBody() {
         return this.body;
     }
 
-    global Boolean getSendBodyAsBlob() {
+    public Boolean getSendBodyAsBlob() {
         return this.sendBodyAsBlob;
     }
 
-    global Integer getTimeout() {
+    public Integer getTimeout() {
         return this.timeout;
     }
 
-    global String getNamedCredentialDeveloperName() {
+    public String getNamedCredentialDeveloperName() {
         return this.namedCredentialDeveloperName;
     }
 
-    global String getNamedCredentialPath() {
+    public String getNamedCredentialPath() {
         return this.namedCredentialPath;
     }
 
-    global Integer getRetries() {
+    public Integer getRetries() {
         return this.retries;
     }
 
-    global HttpResponse request() {
+    public HttpResponse request() {
         return HttpClient.request(this);
     }
 
-    global Object request(Type classType) {
+    public Object request(Type classType) {
         return HttpClient.request(this, classType);
     }
 
-    global static Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    global static Builder builder(HttpClientConfig config) {
+    public static Builder builder(HttpClientConfig config) {
         return new Builder(config);
     }
 
-    global class Builder {
+    public class Builder {
         private String url;
         private String method;
         private Map<String,String> headers;
@@ -78,11 +78,11 @@ global class HttpClientConfig {
         private String namedCredentialPath;
         private Integer retries;
 
-        global Builder(HttpClientConfig config) {
+        public Builder(HttpClientConfig config) {
             this.fromHttpClientConfig(config);
         }
 
-        global Builder() {
+        public Builder() {
             this.headers = new Map<String,String>();
             this.params = new Map<String,String>();
             this.sendBodyAsBlob = false;
@@ -91,62 +91,62 @@ global class HttpClientConfig {
             this.retries = 1;
         }
 
-        global Builder setUrl(String url) {
+        public Builder setUrl(String url) {
             this.url = url;
             return this;
         }
 
-        global Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
+        public Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
             return this.setUrl(namedCredential.DeveloperName, namedCredentialPath);
         }
 
-        global Builder setUrl(String namedCredentialDeveloperName, String namedCredentialPath) {
+        public Builder setUrl(String namedCredentialDeveloperName, String namedCredentialPath) {
             this.namedCredentialDeveloperName = namedCredentialDeveloperName;
             this.namedCredentialPath = namedCredentialPath;
             return this.setUrl(String.format('callout:{0}{1}', new List<String>{this.namedCredentialDeveloperName, this.namedCredentialPath}));
         }
 
-        global Builder setMethod(String method) {
+        public Builder setMethod(String method) {
             this.method = method;
             return this;
         } 
 
-        global Builder setHeaders(Map<String,String> headers) {
+        public Builder setHeaders(Map<String,String> headers) {
             this.headers.putAll(headers);
             return this;
         }
 
-        global Builder addHeader(String key, String value) {
+        public Builder addHeader(String key, String value) {
             this.headers.put(key, value);
             return this;
         }
 
-        global Builder setParams(Map<String,String> params) {
+        public Builder setParams(Map<String,String> params) {
             this.params.putAll(params);
             return this;
         }
 
-        global Builder addParam(String key, String value) {
+        public Builder addParam(String key, String value) {
             this.params.put(key, value);
             return this;
         }
 
-        global Builder setBody(Object body) {
+        public Builder setBody(Object body) {
             this.body = body;
             return this;
         }
 
-        global Builder setSendBodyAsBlob(Boolean sendBodyAsBlob) {
+        public Builder setSendBodyAsBlob(Boolean sendBodyAsBlob) {
             this.sendBodyAsBlob = sendBodyAsBlob;
             return this;
         }
 
-        global Builder setTimeout(Integer timeout) {
+        public Builder setTimeout(Integer timeout) {
             this.timeout = timeout;
             return this;
         }
 
-        global Builder setRetries(Integer retries) {
+        public Builder setRetries(Integer retries) {
             this.retries = retries;
             return this;
         }
@@ -164,7 +164,7 @@ global class HttpClientConfig {
             this.retries = config.getRetries();
         }
 
-        global HttpClientConfig build() {
+        public HttpClientConfig build() {
             HttpClientConfig config = new HttpClientConfig();
             config.url = this.url;
             config.method = this.method;

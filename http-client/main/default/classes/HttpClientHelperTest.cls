@@ -6,7 +6,7 @@ public class HttpClientHelperTest {
         Map<String,String> headers = new Map<String,String>{
             HttpClientConstants.HEADER_CONTENT_TYPE => HttpClientConstants.HEADER_URL_ENCODED
         };
-        System.assertEquals(true, HttpClientHelper.headersHasContentTypeFormUrlEncoded(headers));
+        Assert.areEqual(true, HttpClientHelper.headersHasContentTypeFormUrlEncoded(headers));
     }
 
     @isTest
@@ -15,7 +15,7 @@ public class HttpClientHelperTest {
             .setUrl('https://www.example.com')
             .setMethod('POST')
             .build();
-        System.assertEquals(true, HttpClientHelper.validAllowedHttpMethods(config));
+        Assert.areEqual(true, HttpClientHelper.validAllowedHttpMethods(config));
     }
 
     @isTest
@@ -23,7 +23,7 @@ public class HttpClientHelperTest {
         HttpClientConfig config = HttpClientConfig.builder()
             .setUrl('')
             .build();
-        System.assertEquals(true, HttpClientHelper.urlIsBlank(config));
+        Assert.areEqual(true, HttpClientHelper.urlIsBlank(config));
     }
 
     @isTest
@@ -31,7 +31,7 @@ public class HttpClientHelperTest {
         HttpClientConfig config = HttpClientConfig.builder()
             .setBody(Blob.valueOf('test'))
             .build();
-        System.assertEquals(true, HttpClientHelper.bodyIsBlob(config));
+        Assert.areEqual(true, HttpClientHelper.bodyIsBlob(config));
     }
 
     @isTest
@@ -39,7 +39,7 @@ public class HttpClientHelperTest {
         HttpClientConfig config = HttpClientConfig.builder()
             .setBody('test')
             .build();
-        System.assertEquals(true, HttpClientHelper.bodyIsString(config));
+        Assert.areEqual(true, HttpClientHelper.bodyIsString(config));
     }
 
     @isTest
@@ -48,18 +48,26 @@ public class HttpClientHelperTest {
             'key1' => 'value1',
             'key2' => 'value2'
         };
-        System.assertEquals(true, HttpClientHelper.objectIsMapStringString(body));
+        Assert.areEqual(true, HttpClientHelper.objectIsMapStringString(body));
     }
 
     @isTest
     static void testBodyIsNull() {
         Object body = null;
-        System.assertEquals(true, HttpClientHelper.objectIsNull(body));
+        Assert.areEqual(true, HttpClientHelper.objectIsNull(body));
     }
 
     @isTest
     static void testGetAllowedHttpMethods() {
         String allowedMethods = HttpClientConstants.getAllowedHttpMethodsAsString();
-        System.assertEquals('GET, POST, PUT, PATCH, DELETE', allowedMethods);
+        Assert.areEqual('GET, POST, PUT, PATCH, DELETE', allowedMethods);
+    }
+
+    @isTest
+    static void testBodyIsBlobNot() {
+        HttpClientConfig config = HttpClientConfig.builder()
+            .setBody('test')
+            .build();
+        Assert.areEqual(false, HttpClientHelper.bodyIsBlob(config));
     }
 }

@@ -1,5 +1,5 @@
-global class HttpClientHelper {
-    global static Boolean headersHasContentTypeFormUrlEncoded(Map<String,String> headers) {
+public class HttpClientHelper {
+    public static Boolean headersHasContentTypeFormUrlEncoded(Map<String,String> headers) {
         Boolean isUrlEncoded = false;
         for (String key : headers.keySet()) {
             if (key.equalsIgnoreCase(HttpClientConstants.HEADER_CONTENT_TYPE)) {
@@ -13,27 +13,27 @@ global class HttpClientHelper {
         return isUrlEncoded;
     }
 
-    global static Boolean validAllowedHttpMethods(HttpClientConfig httpClientConfig) {
+    public static Boolean validAllowedHttpMethods(HttpClientConfig httpClientConfig) {
         return HttpClientConstants.ALLOWED_HTTP_METHODS.contains(httpClientConfig.getMethod().toUpperCase());
     }
 
-    global static Boolean urlIsBlank(HttpClientConfig httpClientConfig) {
+    public static Boolean urlIsBlank(HttpClientConfig httpClientConfig) {
         return String.isBlank(httpClientConfig.getUrl());
     }
 
-    global static Boolean bodyIsBlob(HttpClientConfig httpClientConfig) {
+    public static Boolean bodyIsBlob(HttpClientConfig httpClientConfig) {
         return httpClientConfig.getBody() instanceof Blob;
     }
 
-    global static Boolean bodyIsString(HttpClientConfig httpClientConfig) {
+    public static Boolean bodyIsString(HttpClientConfig httpClientConfig) {
         return httpClientConfig.getBody() instanceof String;
     }
 
-    global static Boolean objectIsMapStringString(Object body) {
+    public static Boolean objectIsMapStringString(Object body) {
         return body instanceof Map<String,String>;
     }
 
-    global static Boolean objectIsNull(Object body) {
+    public static Boolean objectIsNull(Object body) {
         return body == null;
     }
 }

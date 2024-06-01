@@ -1,36 +1,36 @@
-global class HttpClientErrorHandlerResponse {
+public class HttpClientErrorHandlerResponse {
     private String responseBody;
     private Integer statusCode;
     private String status;
     private HttpResponse response;
 
-    global HttpClientErrorHandlerResponse() {
+    public HttpClientErrorHandlerResponse() {
         this.responseBody = '';
         this.statusCode = 0;
         this.status = '';
         this.response = null;
     }
 
-    global HttpClientErrorHandlerResponse(HttpResponse response) {
+    public HttpClientErrorHandlerResponse(HttpResponse response) {
         this.responseBody = response.getBody();
         this.statusCode = response.getStatusCode();
         this.status = response.getStatus();
         this.response = response;
     }
     
-    global String getResponseBody() {
+    public String getResponseBody() {
         return this.responseBody;
     }
     
-    global Integer getStatusCode() {
+    public Integer getStatusCode() {
         return this.statusCode;
     }
     
-    global String getStatus() {
+    public String getStatus() {
         return this.status;
     }
 
-    global HttpResponse getResponse() {
+    public HttpResponse getResponse() {
         return this.response;
     }
 }
