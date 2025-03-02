@@ -1,60 +1,60 @@
 public class HttpClient {
     public static HttpResponse doPatch(String url, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PATCH).setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_PATCH).url(url).headers(headers).body(body).build();
 
         return request(config);
     }
 
     public static Object doPatch(String url, Type classType, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PATCH).setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_PATCH).url(url).headers(headers).body(body).build();
 
         return request(config, classType);
     }
 
     public static HttpResponse doPut(String url, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PUT).setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_PUT).url(url).headers(headers).body(body).build();
 
         return request(config);
     }
 
     public static Object doPut(String url, Type classType, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_PUT).setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_PUT).url(url).headers(headers).body(body).build();
 
         return request(config, classType);
     }
 
     public static HttpResponse doPost(String url, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_POST).setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_POST).url(url).headers(headers).body(body).build();
 
         return request(config);
     }
 
     public static Object doPost(String url, Type classType, Map<String,String> headers, Object body) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_POST).setUrl(url).setHeaders(headers).setBody(body).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_POST).url(url).headers(headers).body(body).build();
 
         return request(config, classType);
     }
 
     public static HttpResponse doDelete(String url, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_DELETE).setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_DELETE).url(url).headers(headers).params(params).build();
 
         return request(config);
     }
 
     public static Object doDelete(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_DELETE).setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_DELETE).url(url).headers(headers).params(params).build();
 
         return request(config, classType);
     }
 
     public static HttpResponse doGet(String url, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_GET).setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_GET).url(url).headers(headers).params(params).build();
 
         return request(config);
     }
 
     public static Object doGet(String url, Type classType, Map<String,String> headers, Map<String,String> params) {
-        HttpClientConfig config = HttpClientConfig.builder().setMethod(HttpClientConstants.HTTP_GET).setUrl(url).setHeaders(headers).setParams(params).build();
+        HttpClientConfig config = HttpClientConfig.builder().method(HttpClientConstants.HTTP_GET).url(url).headers(headers).params(params).build();
 
         return request(config, classType);
     }
@@ -83,12 +83,10 @@ public class HttpClient {
                 response = http.send(request);
 
                 validateHttpResponse(response);
-
-                return response;
             } catch (Exception e) {
                 if(retries == config.getRetries()) {
                     System.debug(System.Label.REQUEST_ATTEMPTS_EXCEEDED);
-                    throw e;
+                    throw new HttpClientException(e.getMessage());
                 }
             } finally {
                 retries++;

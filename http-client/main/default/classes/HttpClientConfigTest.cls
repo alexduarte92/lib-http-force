@@ -13,15 +13,15 @@ public class HttpClientConfigTest {
         
         
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
+            .url(url)
+            .method(method)
+            .headers(headers)
             .addHeader('Authorization', 'Basic oipajsidasidad==')
-            .setParams(params)
+            .params(params)
             .addParam('teste', 'teste1')
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         Assert.areEqual(url, config.getUrl());
@@ -42,15 +42,15 @@ public class HttpClientConfigTest {
         Integer timeout = 5000;
         
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
+            .url(url)
+            .method(method)
+            .headers(headers)
             .addHeader('Authorization', 'Basic oipajsidasidad==')
-            .setParams(params)
+            .params(params)
             .addParam('teste', 'teste1')
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         HttpClientConfig config_new = HttpClientConfig.builder(config).build();
@@ -72,15 +72,15 @@ public class HttpClientConfigTest {
         Integer timeout = 5000;
 
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl('CREDENTIALTESTE', '/path')
-            .setMethod(method)
-            .setHeaders(headers)
+            .namedCredential('CREDENTIALTESTE', '/path')
+            .method(method)
+            .headers(headers)
             .addHeader('Authorization', 'Basic oipajsidasidad==')
-            .setParams(params)
+            .params(params)
             .addParam('teste', 'teste1')
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         Assert.areEqual('callout:CREDENTIALTESTE/path', config.getUrl());
@@ -107,13 +107,13 @@ public class HttpClientConfigTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(JSON.serialize(body))
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(JSON.serialize(body))
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         config.request();

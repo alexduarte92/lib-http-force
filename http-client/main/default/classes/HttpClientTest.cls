@@ -15,16 +15,16 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
+            .url(url)
+            .method(method)
+            .headers(headers)
             .addHeader('SF-Header', 'true')
-            .setParams(params)
+            .params(params)
             .addParam('paramTest', 'paramTest')
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
-            .setRetries(2)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
+            .retries(2)
             .build();
         
         HttpClient.request(config);
@@ -45,11 +45,11 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         HttpClient.request(config);
@@ -71,17 +71,18 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         try {
             HttpClient.request(config);
+            Assert.fail();
         } catch (HttpClientException e) {
             System.debug(e.getMessage());
             System.debug(e.getHttpErrorResponse().getResponse());
@@ -104,16 +105,17 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(null)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(null)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         try {
             HttpClient.request(config);
+            Assert.fail();
         } catch (HttpClientException e) {
             System.debug(e.getMessage());
         }
@@ -135,17 +137,18 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         try {
             HttpClient.request(config);
+            Assert.fail();
         } catch (HttpClientException e) {
             System.debug(e.getMessage());
         }
@@ -167,13 +170,13 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         try {
@@ -199,13 +202,13 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(Blob.valueOf(body))
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(Blob.valueOf(body))
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         HttpClient.request(config);
@@ -227,13 +230,13 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         HttpClient.request(config);
@@ -255,13 +258,13 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(body)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(body)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         try {
@@ -287,13 +290,13 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(null)
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(null)
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         try {
@@ -319,18 +322,19 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(JSON.serialize(body))
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
-            .setRetries(3)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(JSON.serialize(body))
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
+            .retries(3)
             .build();
         
             try {
                 HttpClient.request(config);
+                Assert.fail();
             } catch (HttpClientException e) {
                 System.debug(e.getMessage());
                 System.debug(e.getHttpErrorResponse());
@@ -356,13 +360,13 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(JSON.serialize(body))
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(JSON.serialize(body))
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
         Map<String,String> response = (Map<String,String>) HttpClient.request(config,Map<String,String>.class);
@@ -384,17 +388,18 @@ public class HttpClientTest {
         Test.setMock(HttpCalloutMock.class, mock);
         Test.startTest();
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl(url)
-            .setMethod(method)
-            .setHeaders(headers)
-            .setParams(params)
-            .setBody(JSON.serialize(body))
-            .setSendBodyAsBlob(sendBodyAsBlob)
-            .setTimeout(timeout)
+            .url(url)
+            .method(method)
+            .headers(headers)
+            .params(params)
+            .body(JSON.serialize(body))
+            .sendBodyAsBlob(sendBodyAsBlob)
+            .timeout(timeout)
             .build();
         
             try{
                 Map<String,String> response = (Map<String,String>) HttpClient.request(config,Map<String,String>.class);
+                Assert.fail();
             } catch (JSONException e) {
                 System.debug(e.getMessage());
             }

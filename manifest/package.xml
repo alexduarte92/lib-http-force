@@ -1,8 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>HttpClient</members>
+        <members>HttpClientConfig</members>
+        <members>HttpClientConfigTest</members>
+        <members>HttpClientConstants</members>
+        <members>HttpClientErrorHandlerResponse</members>
+        <members>HttpClientException</members>
+        <members>HttpClientHelper</members>
+        <members>HttpClientHelperTest</members>
+        <members>HttpClientTest</members>
         <name>ApexClass</name>
     </types>
-    <version>57.0</version>
+    <types>
+        <members>HttpClientTestSuite</members>
+        <name>ApexTestSuite</name>
+    </types>
+    <types>
+        <members>ERROR_DESERIALIZING_JSON</members>
+        <members>ERROR_MAKING_REQUEST</members>
+        <members>HTTP_METHOD_NOT_ALLOWED</members>
+        <members>PERFORMING_REQUEST_ATTEMPT</members>
+        <members>REQUEST_ATTEMPTS_EXCEEDED</members>
+        <members>URL_ENCODED_CONTENT_TYPE_REQUIREMENT</members>
+        <members>URL_MUST_NOT_BE_NULL_OR_EMPTY</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
+    </types>
+    <version>63.0</version>
 </Package>

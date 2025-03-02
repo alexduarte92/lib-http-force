@@ -77,29 +77,29 @@ public class HttpClientConfig {
             this.retries = config.getRetries();
         }
 
-        public Builder setUrl(String url) {
+        public Builder url(String url) {
             this.url = url;
             return this;
         }
 
-        public Builder setUrl(String namedCredential, String namedCredentialPath) {
+        public Builder namedCredential(String namedCredential, String namedCredentialPath) {
             this.namedCredentialDeveloperName = namedCredential;
             this.namedCredentialPath = namedCredentialPath;
             this.url = 'callout:' + this.namedCredentialDeveloperName + this.namedCredentialPath;
             return this;
         }
 
-        public Builder setUrl(NamedCredential namedCredential, String namedCredentialPath) {
-            this.setUrl(namedCredential.DeveloperName, namedCredentialPath);
+        public Builder namedCredential(NamedCredential namedCredential, String namedCredentialPath) {
+            this.namedCredential(namedCredential.DeveloperName, namedCredentialPath);
             return this;
         }
 
-        public Builder setMethod(String method) {
+        public Builder method(String method) {
             this.method = method;
             return this;
         }
 
-        public Builder setHeaders(Map<String, String> headers) {
+        public Builder headers(Map<String, String> headers) {
             this.headers.putAll(headers);
             return this;
         }
@@ -109,7 +109,7 @@ public class HttpClientConfig {
             return this;
         }
 
-        public Builder setParams(Map<String, String> params) {
+        public Builder params(Map<String, String> params) {
             this.params.putAll(params);
             return this;
         }
@@ -119,22 +119,22 @@ public class HttpClientConfig {
             return this;
         }
 
-        public Builder setBody(Object body) {
+        public Builder body(Object body) {
             this.body = body;
             return this;
         }
 
-        public Builder setSendBodyAsBlob(Boolean sendBodyAsBlob) {
+        public Builder sendBodyAsBlob(Boolean sendBodyAsBlob) {
             this.sendBodyAsBlob = sendBodyAsBlob;
             return this;
         }
 
-        public Builder setTimeout(Integer timeout) {
+        public Builder timeout(Integer timeout) {
             this.timeout = timeout;
             return this;
         }
 
-        public Builder setRetries(Integer retries) {
+        public Builder retries(Integer retries) {
             this.retries = retries;
             return this;
         }

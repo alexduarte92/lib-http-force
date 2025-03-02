@@ -12,8 +12,8 @@ public class HttpClientHelperTest {
     @isTest
     static void testValidAllowedHttpMethods() {
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl('https://www.example.com')
-            .setMethod('POST')
+            .url('https://www.example.com')
+            .method('POST')
             .build();
         Assert.areEqual(true, HttpClientHelper.validAllowedHttpMethods(config));
     }
@@ -21,7 +21,7 @@ public class HttpClientHelperTest {
     @isTest
     static void testUrlIsBlank() {
         HttpClientConfig config = HttpClientConfig.builder()
-            .setUrl('')
+            .url('')
             .build();
         Assert.areEqual(true, HttpClientHelper.urlIsBlank(config));
     }
@@ -29,7 +29,7 @@ public class HttpClientHelperTest {
     @isTest
     static void testBodyIsBlob() {
         HttpClientConfig config = HttpClientConfig.builder()
-            .setBody(Blob.valueOf('test'))
+            .body(Blob.valueOf('test'))
             .build();
         Assert.areEqual(true, HttpClientHelper.bodyIsBlob(config));
     }
@@ -37,7 +37,7 @@ public class HttpClientHelperTest {
     @isTest
     static void testBodyIsString() {
         HttpClientConfig config = HttpClientConfig.builder()
-            .setBody('test')
+            .body('test')
             .build();
         Assert.areEqual(true, HttpClientHelper.bodyIsString(config));
     }
@@ -66,7 +66,7 @@ public class HttpClientHelperTest {
     @isTest
     static void testBodyIsBlobNot() {
         HttpClientConfig config = HttpClientConfig.builder()
-            .setBody('test')
+            .body('test')
             .build();
         Assert.areEqual(false, HttpClientHelper.bodyIsBlob(config));
     }
