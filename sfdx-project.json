@@ -4,8 +4,8 @@
       "path": "http-client",
       "default": true,
       "package": "http-client",
-      "versionNumber": "0.0.1-BETA",
-      "versionName": "0.0.1"
+      "versionNumber": "1.0.0",
+      "versionName": "1.0.0"
     }
   ],
   "name": "HttpClient",
