@@ -28,11 +28,11 @@ public class HttpClientConfigTest {
       .timeout(timeout)
       .build();
 
-    Assert.areEqual(url, config.getUrl());
-    Assert.areEqual(method, config.getMethod());
-    Assert.areEqual(body, config.getBody());
-    Assert.areEqual(sendBodyAsBlob, config.getSendBodyAsBlob());
-    Assert.areEqual(timeout, config.getTimeout());
+    Assert.areEqual(url, config.getUrl(), 'URL does not match.');
+    Assert.areEqual(method, config.getMethod(), 'Method does not match.');
+    Assert.areEqual(body, config.getBody(), 'Body does not match.');
+    Assert.areEqual(sendBodyAsBlob, config.getSendBodyAsBlob(), 'Send body as blob does not match.');
+    Assert.areEqual(timeout, config.getTimeout(), 'Timeout does not match.');
   }
 
   @isTest
@@ -63,13 +63,13 @@ public class HttpClientConfigTest {
       .timeout(timeout)
       .build();
 
-    HttpClientConfig config_new = HttpClientConfig.builder(config).build();
+    final HttpClientConfig configNew = HttpClientConfig.builder(config).build();
 
-    Assert.areEqual(config_new.getUrl(), config.getUrl());
-    Assert.areEqual(config_new.getMethod(), config.getMethod());
-    Assert.areEqual(config_new.getBody(), config.getBody());
-    Assert.areEqual(config_new.getSendBodyAsBlob(), config.getSendBodyAsBlob());
-    Assert.areEqual(config_new.getTimeout(), config.getTimeout());
+    Assert.areEqual(configNew.getUrl(), config.getUrl(),'URL does not match.');
+    Assert.areEqual(configNew.getMethod(), config.getMethod(),'Method does not match.');
+    Assert.areEqual(configNew.getBody(), config.getBody(),'Body does not match.');
+    Assert.areEqual(configNew.getSendBodyAsBlob(), config.getSendBodyAsBlob(),'Send body as blob does not match.');
+    Assert.areEqual(configNew.getTimeout(), config.getTimeout(),'Timeout does not match.');
   }
 
   @isTest
@@ -99,16 +99,17 @@ public class HttpClientConfigTest {
       .timeout(timeout)
       .build();
 
-    Assert.areEqual('callout:CREDENTIALTESTE/path', config.getUrl());
+    Assert.areEqual('callout:CREDENTIALTESTE/path', config.getUrl(),'URL does not match.');
     Assert.areEqual(
       'CREDENTIALTESTE',
-      config.getNamedCredentialDeveloperName()
+      config.getNamedCredentialDeveloperName(),
+      'Named Credential Developer Name does not match.'
     );
-    Assert.areEqual('/path', config.getNamedCredentialPath());
-    Assert.areEqual(method, config.getMethod());
-    Assert.areEqual(body, config.getBody());
-    Assert.areEqual(sendBodyAsBlob, config.getSendBodyAsBlob());
-    Assert.areEqual(timeout, config.getTimeout());
+    Assert.areEqual('/path', config.getNamedCredentialPath(),'Named Credential Path does not match.');
+    Assert.areEqual(method, config.getMethod(),'Method does not match.');
+    Assert.areEqual(body, config.getBody(),'Body does not match.');
+    Assert.areEqual(sendBodyAsBlob, config.getSendBodyAsBlob(),'Send body as blob does not match.');
+    Assert.areEqual(timeout, config.getTimeout(),'Timeout does not match.');
   }
 
   @isTest
@@ -146,8 +147,13 @@ public class HttpClientConfigTest {
       .timeout(timeout)
       .build();
 
-    config.request();
-    config.request(Map<String, String>.class);
+    HttpResponse httpResponse = config.request();
+    Map<String, String> httpMapResponse = (Map<String, String>) config.request(Map<String, String>.class);
     Test.stopTest();
+
+    Assert.isNotNull(httpResponse,'Response is null.');
+    Assert.areEqual(config.getBody(), httpResponse.getBody(), 'Body does not match.');
+    Assert.isNotNull(httpMapResponse, 'Response is null');
+    Assert.areEqual(httpMapResponse, body, 'Body does not match.');
   }
 }
